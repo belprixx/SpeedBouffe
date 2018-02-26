@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  mongo: 
+    image: mongo:latest
+    volumes:
+      - '/data/volumes/mongo/data:/data/db'
+    ports:
+      - '127.0.0.127:27017:27017'
+
+  sailsjs:
+    build: image/sailsjs
+    volumes:
+      - ../../:/home/sailsjs/src
+    ports:
+      - 1337:1337
+    depends_on:
+      - mongo
