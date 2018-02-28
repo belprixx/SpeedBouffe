@@ -1,9 +1,9 @@
 FROM node:latest
 
-RUN npm i --prefix /home -g sails grunt bower && \
+RUN npm i -g sails grunt bower && \
 	mkdir -p /home/sailsjs/src
 
-COPY src /home/sailsjs/src
+# COPY src /home/sailsjs/src
 WORKDIR /home/sailsjs/src
 
 RUN yarn install ; \
