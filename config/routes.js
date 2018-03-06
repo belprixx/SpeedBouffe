@@ -34,7 +34,7 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -45,5 +45,15 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+
+  '/create_commande/:acheteur&:nbRepas&:nomRepas&:date&:prixTotal': {
+      controller: 'CommandeController',
+      action: 'createCommande',
+  },
+
+    '/blog' : {
+        controller: 'CommandeController',
+        action: 'getCommandes',
+    }
 
 };
