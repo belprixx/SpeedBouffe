@@ -1,0 +1,21 @@
+{
+  "name": "speedBouffe",
+  "description": "a Sails application",
+  "main": "app.js",
+  "authors": [
+    "ttison"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/belprixx/SpeedBouffe",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1"
+  }
+}

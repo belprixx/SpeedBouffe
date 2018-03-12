@@ -33,7 +33,11 @@ var jsFilesToInject = [
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
-  'js/**/*.js'
+  'js/**/*.js',
+
+    'vendor/jquery/dist/jquery.min.js',
+    // Bootstrap JS
+    'vendor/bootstrap/dist/js/bootstrap.min.js',
 ];
 
 
