@@ -1,0 +1,39 @@
+{
+  "data": {
+    "commande": []
+  },
+  "schema": {
+    "commande": {
+      "id": {
+        "autoIncrement": true,
+        "type": "integer",
+        "primaryKey": true,
+        "unique": true
+      },
+      "acheteur": {
+        "type": "string"
+      },
+      "nbRepas": {
+        "type": "integer"
+      },
+      "nomRepas": {
+        "type": "string"
+      },
+      "date": {
+        "type": "date"
+      },
+      "prixTotal": {
+        "type": "integer"
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "commande": {}
+  }
+}
