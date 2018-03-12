@@ -11,7 +11,7 @@ services:
   sailsjs:
     build: image/sailsjs
     volumes:
-      - ../../:/home/sailsjs/src
+      - ./:/home/sailsjs/src
     ports:
       - 1337:1337
     depends_on:
