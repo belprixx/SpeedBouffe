@@ -1,0 +1,12 @@
+<h1>Les commandes</h1>
+<ul>
+    <% commandes.forEach(function(com){ %>
+    <li>
+        <h2><%= com.acheteur %></h2>
+        <p><%= com.nbRepas %></p>
+        <p><%= com.nomRepas %></p>
+        <p><%= com.date %></p>
+        <p><%= com.prixTotal %></p>
+    </li>
+    <% }); %>
+</ul>
