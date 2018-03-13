@@ -34,10 +34,6 @@ var jsFilesToInject = [
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   'js/**/*.js',
-
-    'vendor/jquery/dist/jquery.min.js',
-    // Bootstrap JS
-    'vendor/bootstrap/dist/js/bootstrap.min.js',
 ];
 
 
@@ -87,5 +83,3 @@ module.exports.templateFilesToInject = templateFilesToInject.map(function(tplPat
   }
   return require('path').join('assets/',tplPath);
 });
-
-
