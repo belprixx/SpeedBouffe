@@ -55,7 +55,7 @@ module.exports.routes = {
         view: 'stats'
     },
 
-    '/blog' : {
+    '/commandes' : {
         controller: 'CommandeController',
         action: 'getCommandes',
     }
