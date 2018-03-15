@@ -46,7 +46,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/create_commande/:acheteur&:nbRepas&:nomRepas&:date&:prixTotal': {
+  '/create_commande': {
       controller: 'CommandeController',
       action: 'createCommande',
   },
@@ -61,6 +61,7 @@ module.exports.routes = {
     },
 
     '/nvlleCommande' : {
+        //controller: 'CommandeController',
         view: 'nvlleCommande'
     }
 
