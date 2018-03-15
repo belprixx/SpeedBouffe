@@ -58,6 +58,10 @@ module.exports.routes = {
     '/commandes' : {
         controller: 'CommandeController',
         action: 'getCommandes',
+    },
+
+    '/nvlleCommande' : {
+        view: 'nvlleCommande'
     }
 
 };
