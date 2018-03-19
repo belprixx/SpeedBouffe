@@ -51,8 +51,13 @@ module.exports.routes = {
       action: 'createCommande',
   },
 
-    '/stats': {
+    /*'/stats': {
         view: 'stats'
+    },*/
+
+    '/stats': {
+        controller: 'StatsController',
+        action: 'getCommandes',
     },
 
     '/commandes' : {
