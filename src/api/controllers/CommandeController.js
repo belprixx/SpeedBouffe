@@ -10,6 +10,7 @@ module.exports = {
         Commande.create( { acheteur: req.param('acheteur'), nbRepas: req.param('nbRepas'), nomRepas: req.param('nomRepas'), date: req.param('date'), prixTotal: req.param('prixTotal') }, function(err,created){
             if(!err) {
                 console.log('Article créé : '+ created.nomRepas +', ayant pour ID : '+created.id+'.');
+                res.redirect('/commandes');
             }
             else {
                 return err;

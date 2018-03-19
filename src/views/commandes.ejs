@@ -4,12 +4,13 @@
 <ul>
     <% commandes.forEach(function(com){ %>
     <li>
-        <h2><%= com.acheteur %></h2>
-        <p><%= com.nbRepas %></p>
-        <p><%= com.nomRepas %></p>
-        <p><%= com.date %></p>
-        <p><%= com.prixTotal %></p>
+        <h2>Nom de l'acheteur : <%= com.acheteur %></h2>
+        <p>Nombre de repas : <%= com.nbRepas %></p>
+        <p>Nom du repas : <%= com.nomRepas %></p>
+        <p>Date de livraison : <%= com.date %></p>
+        <p>Prix total : <%= com.prixTotal %> €</p>
     </li>
+    <hr>
     <% }); %>
 </ul>
 
