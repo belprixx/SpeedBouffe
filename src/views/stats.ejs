@@ -6,7 +6,6 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Charts</h1>
-            <p> TEST : <%= stats.prixMoyen %></p>
         </div>
     </div><!--/.row-->
 
@@ -15,7 +14,7 @@
             <div class="panel panel-default">
                 <div class="panel-body easypiechart-panel">
                     <p>Nombre de commandes</p>
-                    <div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span></div>
+                    <div class="easypiechart" id="easypiechart-teal" data-percent=<%= nbTotalCmd %> ><span class="percent"><%= nbTotalCmd %></span></div>
                 </div>
             </div>
         </div>
@@ -23,7 +22,7 @@
             <div class="panel panel-default">
                 <div class="panel-body easypiechart-panel">
                     <p>Nombre de repas moyen</p>
-                    <div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span></div>
+                    <div class="easypiechart" id="easypiechart-blue" data-percent=<%= nbRepasMoyen %> ><span class="percent"><%= nbRepasMoyen %></span></div>
                 </div>
             </div>
         </div>
@@ -31,14 +30,14 @@
             <div class="panel panel-default">
                 <div class="panel-body easypiechart-panel">
                     <p>Prix moyen des commandes</p>
-                    <div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span></div>
+                    <div class="easypiechart" id="easypiechart-orange" data-percent=<%= prixMoyen %> ><span class="percent"><%= prixMoyen %>€</span></div>
                 </div>
             </div>
         </div>
         <div class="col-xs-6 col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body easypiechart-panel">
-                    <div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span></div>
+                    <div class="easypiechart" id="easypiechart-red" data-percent= ><span class="percent">27%</span></div>
                 </div>
             </div>
         </div>

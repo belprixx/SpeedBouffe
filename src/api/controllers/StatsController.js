@@ -7,7 +7,7 @@
 
 module.exports = {
 
-    getCommandes: function(req, res) {
+    getInfos: function(req, res) {
         Commande.find({}, function(err, found){
             console.log("hello");
             var allCommandes = {commandes: found};
@@ -30,11 +30,20 @@ module.exports = {
             var nbRepasMoyen = nbRepasTotal / allCommandes.commandes.length;
             var prixMoyen = prixTotal / allCommandes.commandes.length;
 
+            nbRepasMoyen = Math.round(nbRepasMoyen * 100) / 100;
+            prixMoyen = Math.round(prixMoyen * 100) / 100;
+
             console.log("nb repas moyen et prix moyen :")
             console.log(nbRepasMoyen);
             console.log(prixMoyen);
 
-            res.view( 'stats', allCommandes, nbRepasMoyen, prixMoyen, nbTotalCmd );
+
+            return res.view( 'stats', {
+                allCommandes :allCommandes,
+                nbRepasMoyen : nbRepasMoyen,
+                prixMoyen : prixMoyen,
+                nbTotalCmd : nbTotalCmd }
+            );
         });
     }
 };

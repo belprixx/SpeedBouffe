@@ -57,7 +57,7 @@ module.exports.routes = {
 
     '/stats': {
         controller: 'StatsController',
-        action: 'getCommandes',
+        action: 'getInfos',
     },
 
     '/commandes' : {
