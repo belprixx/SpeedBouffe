@@ -1,14 +1,17 @@
-FROM node:latest
+FROM node:8
 
 COPY entrypoint.sh /entrypoint.sh
 
-RUN mkdir -p /home/sailsjs/src ; \
-    adduser sailsjs --shell /sbin/nologin --home /home/sailsjs ; \
-    chown +x /entrypoint.sh
+RUN npm install -g sails
+RUN npm install -g grunt
+RUN npm install -g bower
+RUN npm install sails-mongo --save
+RUN npm cache clear --force
 
-WORKDIR /home/sailsjs/src
+RUN mkdir /root/speedbouffe ; \
+    chmod +x /entrypoint.sh
 
-VOLUME /home/sailsjs/src
+VOLUME /root/speedbouffe
 
 EXPOSE 1337
 ENTRYPOINT /entrypoint.sh
