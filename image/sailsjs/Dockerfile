@@ -2,9 +2,9 @@ FROM node:latest
 
 COPY entrypoint.sh /entrypoint.sh
 
-RUN mkdir -p /home/sailsjs/src ; \
-    adduser sailsjs --shell /sbin/nologin --home /home/sailsjs ; \
-    chown +x /entrypoint.sh
+RUN mkdir -p /home/sailsjs/src ;
+#    adduser sailsjs --shell /sbin/nologin --home /home/sailsjs ; \
+#    chown +x /entrypoint.sh
 
 WORKDIR /home/sailsjs/src
 
