@@ -24,7 +24,8 @@
     "popper.js": "^1.14.0",
     "rc": "1.0.1",
     "sails": "~0.12.14",
-    "sails-disk": "^0.10.10"
+    "sails-disk": "^1.0.1",
+    "sails-mongo": "^0.12.2"
   },
   "scripts": {
     "debug": "node debug app.js",
