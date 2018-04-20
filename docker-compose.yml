@@ -1,18 +1,58 @@
 version: '3'
-
 services:
   mongo: 
     image: mongo:latest
     volumes:
-      - '/data/volumes/mongo/data:/data/db'
+      - './volumes/mongo/data:/data/db'
     ports:
-      - '127.0.0.127:27017:27017'
+      - '127.0.0.1:27017:27017'
+    networks:
+        - mongo-symfony
 
-  sailsjs:
-    build: image/sailsjs
-    volumes:
-      - ./:/root/speedbouffe
-    ports:
-      - 1337:1337
-    depends_on:
-      - mongo
+#  sailsjs:
+#    build: image/sailsjs
+#    volumes:
+#      - ./:/root/speedbouffe
+#    ports:
+#      - 1337:1337
+#    depends_on:
+#      - mongo
+
+  webserver:
+      depends_on:
+          - php-fpm
+      image: nginx:alpine
+      container_name: http-nginx-speedBouffe
+      environment:
+          - TZ=Europe/Paris
+      working_dir: /application
+      volumes:
+          - ./symfony/speedBouffe:/application
+          - ./symfony/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+          - 8000:80
+      networks:
+          - nginx-symfony
+
+  php-fpm:
+     depends_on:
+       - mongo
+     build: Symfony/php-fpm
+     container_name: symfony-api-speedBouffe
+     environment:
+         - TZ=Europe/Paris
+     working_dir: /application
+     volumes:
+         - ./symfony/speedBouffe:/application
+         - ./symfony/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+     networks:
+         - mongo-symfony
+         - nginx-symfony
+
+networks:
+
+  nginx-symfony:
+    driver: bridge
+
+  mongo-symfony:
+     driver: bridge
