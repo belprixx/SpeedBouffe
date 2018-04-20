@@ -15,6 +15,7 @@ if (empty($argv[1]) == true) {
 
 while (true) {
     $result = array();
+	$contextDetail = array();
     usleep($timer);
 
     $firstAge = $db->getAge();
@@ -33,10 +34,11 @@ while (true) {
     $result['Acheteur']['Age'] = $firstAge;
     $result['Acheteur']['Email'] = strtolower($firstEmail);
 
+	$contextAcheteur = setContext($result['Acheteur']);
     $result['Infos_commande']['Jour'] = $db->getBuyDate();
     $result['Infos_commande']['Horaire_livraison'] = $db->getHour();
     $result['Infos_commande']['Paiement_espece'] = $db->needCash();
-
+	$contextInfoCommande = setContext($result['Infos_commande']);
 
     for ($i = 0; $i < $nbMeal; $i++) {
         $cmd = "Commande" . $i;
@@ -61,20 +63,31 @@ while (true) {
             $result['Details_commande'][$i][$cmd]['Prenom'] = $otherPrenom;
             $result['Details_commande'][$i][$cmd]['Age'] = $otherAge;
             $result['Details_commande'][$i][$cmd]['Tarif'] = $otherPersonPricing;
+			
+		$contextDetail[$i] = setContext($result['Details_commande'][$i]);
         }
     }
-
-    $opts = array('http' =>
+    file_get_contents('http://localhost:8100/acheteur', false, $contextAcheteur);
+    echo(json_encode($result));
+	
+	file_get_contents('http://localhost:8100/infoCommande', false, $contextCommand);
+    echo(json_encode($result));
+	for ($i = 0; $i < $nbMeal; $i++) {
+		file_get_contents('http://localhost:8100/infoCommande', false, $contextDetail[$i]);
+	}
+    echo PHP_EOL;
+}
+function setContext($json)
+{
+	$opts = array('http' =>
         array(
             'method'  => 'POST',
             'header'  => 'Content-type: application/json',
-            'content' => json_encode($result)
+            'content' => json_encode($json)
         )
     );
     # Create the context
     $context = stream_context_create($opts);
-    # Get the response (you can use this for GET)
-    file_get_contents('http://localhost:1337/speedbouffe', false, $context);
-    echo(json_encode($result));
-    echo PHP_EOL;
+	return $context;
 }
+
