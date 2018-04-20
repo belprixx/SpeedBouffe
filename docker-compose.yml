@@ -37,7 +37,7 @@ services:
   php-fpm:
      depends_on:
        - mongo
-     build: Symfony/php-fpm
+     build: symfony/php-fpm
      container_name: symfony-api-speedBouffe
      environment:
          - TZ=Europe/Paris
@@ -48,6 +48,7 @@ services:
      networks:
          - mongo-symfony
          - nginx-symfony
+     command: /scripts/entrypoint.sh
 
 networks:
 

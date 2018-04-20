@@ -1,6 +1,8 @@
 FROM phpdockerio/php72-fpm:latest
 WORKDIR "/application"
 
+COPY entrypoint.sh /scripts/entrypoint.sh
+
 # Install selected extensions and other stuff
 RUN apt-get update \
     && apt-get -y --no-install-recommends install  php7.2-mysql php7.2-mongodb \
@@ -20,10 +22,7 @@ RUN apt-get update \
 
 RUN echo 'Europe/Paris' > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
-CMD service php7.2-fpm start && \
-    composer update && \
-	bin/console doctrine:schema:update --force && \
-	bin/console cache:clear --env=dev && \
-	bin/console cache:clear --env=dev && \
-	/etc/init.d/cron start
-
+# CMD service php7.2-fpm start && \
+#    composer update && \
+#	bin/console doctrine:schema:update --force && \
+#	bin/console cache:clear --env=dev
