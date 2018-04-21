@@ -1,0 +1,15 @@
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://speedBouffe_mongo_1:27017
+            options: {}
+    default_database: hello_%kernel.environment%
+    document_managers:
+        default:
+            mappings:
+                AcmeDemoBundle: ~
+            filters:
+                filter-name:
+                    class: Class\Example\Filter\ODM\ExampleFilter
+                    enabled: true
+            metadata_cache_driver: array # array, apc, apcu, memcache, memcached, redis, wincache, zenddata, xcache

@@ -1,14 +1,20 @@
 version: '3'
 services:
-  mongo: 
-    image: mongo:latest
-    volumes:
-      - './volumes/mongo/data:/data/db'
+  mysql:
+    image: mysql:5.5.59
+    container_name: mysql
+    command: --max_allowed_packet=100M
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - TZ=Europe/Paris
+      - MYSQL_DATABASE=command
+      - MYSQL_USER=cmd
+      - MYSQL_PASSWORD=cmd
     ports:
-      - '127.0.0.1:27017:27017'
+      - 3307:3306
     networks:
-        - mongo-symfony
-
+      - mysql-symfony
+   
 #  sailsjs:
 #    build: image/sailsjs
 #    volumes:
@@ -16,7 +22,7 @@ services:
 #    ports:
 #      - 1337:1337
 #    depends_on:
-#      - mongo
+#      - db
 
   webserver:
       depends_on:
@@ -36,7 +42,7 @@ services:
 
   php-fpm:
      depends_on:
-       - mongo
+       - mysql
      build: symfony/php-fpm
      container_name: symfony-api-speedBouffe
      environment:
@@ -46,7 +52,7 @@ services:
          - ./symfony/speedBouffe:/application
          - ./symfony/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
      networks:
-         - mongo-symfony
+         - mysql-symfony
          - nginx-symfony
      command: /scripts/entrypoint.sh
 
@@ -55,5 +61,5 @@ networks:
   nginx-symfony:
     driver: bridge
 
-  mongo-symfony:
+  mysql-symfony:
      driver: bridge
