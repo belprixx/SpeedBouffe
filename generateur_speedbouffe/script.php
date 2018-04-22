@@ -4,6 +4,20 @@ use SpeedBouffe\Database;
 
 require_once 'lib/autoload.php';
 
+function setContext($json)
+{
+	$opts = array('http' =>
+        array(
+            'method'  => 'POST',
+            'header'  => 'Content-type: application/json',
+            'content' => json_encode($json)
+        )
+    );
+    # Create the context
+    $context = stream_context_create($opts);
+	return $context;
+}
+
 $faker = Faker\Factory::create();
 $db = new Database();
 
@@ -34,11 +48,9 @@ while (true) {
     $result['Acheteur']['Age'] = $firstAge;
     $result['Acheteur']['Email'] = strtolower($firstEmail);
 
-	$contextAcheteur = setContext($result['Acheteur']);
     $result['Infos_commande']['Jour'] = $db->getBuyDate();
     $result['Infos_commande']['Horaire_livraison'] = $db->getHour();
     $result['Infos_commande']['Paiement_espece'] = $db->needCash();
-	$contextInfoCommande = setContext($result['Infos_commande']);
 
     for ($i = 0; $i < $nbMeal; $i++) {
         $cmd = "Commande" . $i;
@@ -63,31 +75,24 @@ while (true) {
             $result['Details_commande'][$i][$cmd]['Prenom'] = $otherPrenom;
             $result['Details_commande'][$i][$cmd]['Age'] = $otherAge;
             $result['Details_commande'][$i][$cmd]['Tarif'] = $otherPersonPricing;
-			
-		$contextDetail[$i] = setContext($result['Details_commande'][$i]);
         }
     }
-    file_get_contents('http://localhost:8100/acheteur', false, $contextAcheteur);
-    echo(json_encode($result));
-	
-	file_get_contents('http://localhost:8100/infoCommande', false, $contextCommand);
-    echo(json_encode($result));
-	for ($i = 0; $i < $nbMeal; $i++) {
-		file_get_contents('http://localhost:8100/infoCommande', false, $contextDetail[$i]);
-	}
+    echo(json_encode($result['Acheteur']));
+    $contextAcheteur = setContext($result['Acheteur']);
+    $idAcheteur = intval(file_get_contents('http://localhost:8000/newAcheteur', false, $contextAcheteur));
+    echo $idAcheteur;
+    $result['Infos_commande']['idAcheteur'] = $idAcheteur;
+    $contextCommande = setContext($result['Infos_commande']);
+    echo(json_encode($result['Infos_commande']));
+    $idCommande = intval(file_get_contents('http://localhost:8000/newCommande', false, $contextCommande));
+    for ($i = 0; $i < sizeof($result['Details_commande']); $i++) {
+    	$cmd = "Commande" . $i;
+	$result['Details_commande'][$i][$cmd]['idCommande'] = $idCommande;
+	echo(json_encode($result['Details_commande'][$i][$cmd]));
+	$contextDetail[$i] = setContext($result['Details_commande'][$i][$cmd]);
+	file_get_contents('http://localhost:8000/newDetailCommande', false, $contextDetail[$i]);
+    }
     echo PHP_EOL;
 }
-function setContext($json)
-{
-	$opts = array('http' =>
-        array(
-            'method'  => 'POST',
-            'header'  => 'Content-type: application/json',
-            'content' => json_encode($json)
-        )
-    );
-    # Create the context
-    $context = stream_context_create($opts);
-	return $context;
-}
+
 

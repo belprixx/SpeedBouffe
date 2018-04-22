@@ -36,6 +36,11 @@ class Acheteur
      */
     private $Email;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Age;
+
     public function getId()
     {
         return $this->id;
@@ -92,6 +97,18 @@ class Acheteur
     public function setId(int $Id): self
     {
         $this->Id = $Id;
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->Age;
+    }
+
+    public function setAge(int $Age): self
+    {
+        $this->Age = $Age;
 
         return $this;
     }
