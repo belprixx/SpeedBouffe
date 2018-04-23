@@ -48,7 +48,7 @@ module.exports.routes = {
 
   '/create_commande': {
       controller: 'CommandeController',
-      action: 'createCommande',
+      action: 'createCommande',fish
   },
 
     /*'/stats': {
@@ -66,8 +66,12 @@ module.exports.routes = {
     },
 
     '/nvlleCommande' : {
-
         view: 'nvlleCommande'
+    },
+
+    '/details' : {
+        view : 'detailsCommande'
+
     }
 
 };

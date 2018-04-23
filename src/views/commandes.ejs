@@ -3,6 +3,7 @@
 <h1>Les commandes</h1>
 <ul>
     <% commandes.forEach(function(com){ %>
+    <a href="/details">
     <li>
         <h2>Nom de l'acheteur : <%= com.acheteur %></h2>
         <p>Nombre de repas : <%= com.nbRepas %></p>
@@ -10,6 +11,7 @@
         <p>Date de livraison : <%= com.date %></p>
         <p>Prix total : <%= com.prixTotal %> €</p>
     </li>
+    </a>
     <hr>
     <% }); %>
 </ul>

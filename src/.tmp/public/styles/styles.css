@@ -712,12 +712,12 @@ a.label:hover, a.label:focus {
 
 .navbar input {
   border: 0;
-  background: #444;
-  color: #fff; }
+  background: #fff;
+  color: #444; }
 
 .navbar input:focus {
-  color: #fff;
-  background: #555;
+  color: #444;
+  background: #fff;
   border: 1px solid #30a5ff;
   outline: 0;
   box-shadow: inset 0px 0px 0px 1px #30a5ff; }
